@@ -1,0 +1,33 @@
+Describe how you would build a logistic regression model to predict the probability of a bid winning (win) based on the other columns. What features would you select and why?
+Ans:
+s1 : Do a proper EDA on the dataset to understand how the data behaves.
+s2 : Handle missing values by filling or dropping based on the EDA(ex: if 80% of the data is saying the win_count is above 1 then i would fill it with min value).
+s3 : Select necessary features and decide the target(predict) column.
+s4 : selected features : os_name, ad_unit, size, request_count, bidder, bid_range,(might test this with the lower bid_range(or might be this as well - min_bid) and higher bid_range(or might be this as well - max_bid)), sum_bid(experiment with this one as well).
+s5 : Scale or transform the data format as required to fit in the model.
+s6 : Apply cross_validation techniques like GridSearchCV for hyperparamter tuning and cross_validation with random data to get the best params for the model fitting.
+s6 : Fit the model and evaluate the results based on metrics like accuracy_score.
+s7 : Repeat and experiment with more EDA and feature selection to improve the model accuracy.
+
+why :
+os_name : Can see a lot of variation around this
+ad_unit : This is useful to get where excatly the ad is getting place, will play an important role in winning a bid.
+size : Same as ad_unit
+request_count : In general the more number of tries can lead to more win count, hence selecting this feature.
+bidder : To scale the data and prepare all other features to fit in the model.
+
+Experimental features : Based on trail
+sum_bid, median, min_bid, max_bid, avg_bid
+Check the accuracy_score after adding and removing these features. If there is no much difference or slightly lower difference I'd ignore these features
+as I'll consider the training computation required.
+
+Part 2: Based on the following results from a logistic regression model  trained on the dataset, interpret the coefficients:
+bid_amount: Coefficient = 0.8
+time_to_bid: Coefficient = -0.4
+ad_unit_A: Coefficient = 0.3 (reference category: ad_unit_B)
+
+Ans:
+bid_amount: Coefficient = 0.8 -> the rate or the confidence at which this feature is playing in the model bid_amount has 0.8 is highly related in pushing towards positive winrate.
+time_to_bid: Coefficient = -0.4 -> pusing towards negative win_rate.
+ad_unit_A: Coefficient = 0.3 (reference category: ad_unit_B) -> less significant.
+
